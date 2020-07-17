@@ -1,0 +1,28 @@
+//maxX = 1024, maxY = 600
+
+float screenWidth = 1024; //set to your maxX
+float screenHeight = 600; //set to your maxY
+
+void setup() //runs once
+{
+  fullScreen(); //Sets the program to run in full screen mode
+  
+}
+
+void draw() //runs forever
+{
+  background(0,0,0); //Sets background color to black
+  stroke(78,142,191); //Sets outline of shapes to lightblue
+  
+  fill(13,17,83); //Sets color of rectangles to darkblue
+  rect(0,0,50,200); //draws a rectangle
+  rect(973,400,50,200);
+  
+  fill(108,12,33); //Sets color of ellipse to red
+  ellipse(512,300,40,40); //draws a circle
+  
+  fill(255,255,255); //Sets color of text to white
+  textSize(50); //Sets size of text to 50
+  text("2",250, 300); //writes text 2 on screen
+  text("4", 736.5, 300); //writes text 4 on screen
+}
