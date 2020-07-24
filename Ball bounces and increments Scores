@@ -1,0 +1,104 @@
+//maxX = 1024, maxY = 600
+
+float screenWidth = 1024; //set to your maxX
+float screenHeight = 600; //set to your maxY
+
+int circleX = 512; //Position x of circle
+int circleY = 300; //Position y of circle
+int wCircle = 40; //width of circle
+int hCircle = 40; //height of circle
+
+int xRecta= 0; //Position x of rectangle A 
+int yRecta = 0; //Position y of rectangle A
+int wRecta = 50; //width of rectangle A
+int hRecta = 200; //height of rectangle A
+
+int xRectb= 973; //Position x of rectangle B
+int yRectb = 400; //Position y of rectangle B
+int wRectb = 50; //width of rectangle B
+int hRectb = 200;//height of rectangle B
+
+int sText = 50; //size of text
+
+int playera_Score = 0; //score of left player
+int playeraX = 250; //position x of left players score
+int playeraY = 300; //position y of left players score
+
+int playerb_Score = 0; //score of right player
+int playerbX = 737; //position x of right players score
+int playerbY = 300; //position y of right players score
+
+int circleSpeedX = -3; 
+int circleSpeedY = 2;
+
+int radius = 20; //half of the circles width and height. 
+
+boolean start = false; 
+
+void setup() //runs once
+{
+  fullScreen(); //Sets the program to run in full screen mode
+  
+}
+
+void draw() //runs forever
+{
+  background(3,11,55); //Sets background color to darkblue
+  
+  stroke(78,142,191); //Sets outline of shapes to lightblue
+  
+  fill(81,0,133); //Sets color of rectangles to purple
+  
+  rect(xRecta,yRecta,wRecta,hRecta); //draws a rectangle at top left corner of screen
+  rect(xRectb,yRectb,wRectb,hRectb); //draws a rectangle at bottom right of screen
+  
+  fill(214,0,0); //Sets color of ellipse to red
+  ellipse(circleX,circleY,wCircle,hCircle); //draws a circle
+  
+  fill(255,255,255); //Sets color of text to white
+  
+  textSize(sText); //Sets size of text to 50
+  
+  text(playera_Score,playeraX, playeraY); //writes text 2 on screen
+  text(playerb_Score, playerbX, playerbY); //writes text 4 on screen
+  
+  //starts game if screen is touched
+  if(mousePressed){
+    start = true;
+  }
+  
+  if(start) {
+  //moves circle right and downward
+  circleX = circleX + circleSpeedX;
+  circleY = circleY + circleSpeedY;
+  }
+  
+  //makes ball bounce when it hits the top or bottom walls of screen
+  if((circleY - radius < 0)  || (circleY + radius) > screenHeight){
+    circleSpeedY = circleSpeedY * -1;//reverses direction of the ball
+  }
+  
+  //balls leaves screen when it reaches the left or right walls of screen
+  if((circleX - radius < 0) || (circleX + radius) > screenWidth){
+    circleSpeedX = circleSpeedX * 1;//direction of ball is unchanged. 
+  } 
+    
+  //stops game if ball leaves right wall and increments left players score
+  if(circleX >= screenWidth){
+    playera_Score += 1;
+    circleX = 512;
+    circleY = 300;
+    start = false;
+  }
+  
+  //stops game if ball leaves left wall and increments right players score
+  if(circleX <= 0){
+    playerb_Score += 1;
+    circleX = 512;
+    circleY = 300;
+    start = false;
+  }
+  
+}
+
+
